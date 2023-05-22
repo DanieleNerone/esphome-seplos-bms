@@ -115,41 +115,46 @@ void SeplosBms::on_telemetry_data_(const std::vector<uint8_t> &data) {
   //   58     0x34 0x4E      Residual capacity                13390 * 0.01f = 133.90        Ah
   this->publish_state_(this->residual_capacity_sensor_, (float) seplos_get_16bit(offset + 4) * 0.01f);
 
-  //   60     0x0A           Custom number                    10
-  //   61     0x42 0x68      Battery capacity                 17000 * 0.01f = 170.00        Ah
+ //   60     0x0A           Custom number                    10
+
+  //   xx61     0x42 0x68      Battery capacity                 17000 * 0.01f = 170.00        Ah
   this->publish_state_(this->battery_capacity_sensor_, (float) seplos_get_16bit(offset + 7) * 0.01f);
 
-  //   63     0x03 0x13      Stage of charge                  787 * 0.1f = 78.7             %
-  this->publish_state_(this->state_of_charge_sensor_, (float) seplos_get_16bit(offset + 9) * 0.1f);
+  //   xx67     0x00 0x46      Number of cycles                 70
+  this->publish_state_(this->charging_cycles_sensor_, (float) seplos_get_16bit(offset + 9));
 
-  //   65     0x46 0x50      Rated capacity                   18000 * 0.01f = 180.00        Ah
-  this->publish_state_(this->rated_capacity_sensor_, (float) seplos_get_16bit(offset + 11) * 0.01f);
+//  if (data.size() < offset + 13 + 2) {
+//     return;
+//   }
 
-  if (data.size() < offset + 13 + 2) {
-    return;
-  }
+//   //   63     0x03 0x13      Stage of charge                  787 * 0.1f = 78.7             %
+//   this->publish_state_(this->state_of_charge_sensor_, (float) seplos_get_16bit(offset + 9) * 0.1f);
 
-  //   67     0x00 0x46      Number of cycles                 70
-  this->publish_state_(this->charging_cycles_sensor_, (float) seplos_get_16bit(offset + 13));
+//   //   65     0x46 0x50      Rated capacity                   18000 * 0.01f = 180.00        Ah
+//   this->publish_state_(this->rated_capacity_sensor_, (float) seplos_get_16bit(offset + 11) * 0.01f);
 
-  if (data.size() < offset + 15 + 2) {
-    return;
-  }
+//   if (data.size() < offset + 13 + 2) {
+//     return;
+//   }
 
-  //   69     0x03 0xE8      State of health                  1000 * 0.1f = 100.0           %
-  this->publish_state_(this->state_of_health_sensor_, (float) seplos_get_16bit(offset + 15) * 0.1f);
+//   if (data.size() < offset + 15 + 2) {
+//     return;
+//   }
 
-  if (data.size() < offset + 17 + 2) {
-    return;
-  }
+//   //   69     0x03 0xE8      State of health                  1000 * 0.1f = 100.0           %
+//   this->publish_state_(this->state_of_health_sensor_, (float) seplos_get_16bit(offset + 15) * 0.1f);
 
-  //   71     0x14 0x9F      Port voltage                     5279 * 0.01f = 52.79          V
-  this->publish_state_(this->port_voltage_sensor_, (float) seplos_get_16bit(offset + 17) * 0.01f);
+//   if (data.size() < offset + 17 + 2) {
+//     return;
+//   }
 
-  //   73     0x00 0x00      Reserved
-  //   75     0x00 0x00      Reserved
-  //   77     0x00 0x00      Reserved
-  //   79     0x00 0x00      Reserved
+//   //   71     0x14 0x9F      Port voltage                     5279 * 0.01f = 52.79          V
+//   this->publish_state_(this->port_voltage_sensor_, (float) seplos_get_16bit(offset + 17) * 0.01f);
+
+//   //   73     0x00 0x00      Reserved
+//   //   75     0x00 0x00      Reserved
+//   //   77     0x00 0x00      Reserved
+//   //   79     0x00 0x00      Reserved
 }
 
 void SeplosBms::dump_config() {

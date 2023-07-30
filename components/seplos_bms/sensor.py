@@ -4,6 +4,10 @@ import esphome.config_validation as cv
 from esphome.const import (
     CONF_CURRENT,
     CONF_POWER,
+<<<<<<< HEAD
+=======
+    DEVICE_CLASS_BATTERY,
+>>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
     DEVICE_CLASS_CURRENT,
     DEVICE_CLASS_EMPTY,
     DEVICE_CLASS_POWER,
@@ -72,7 +76,10 @@ CONF_TEMPERATURE_6 = "temperature_6"
 ICON_CURRENT_DC = "mdi:current-dc"
 ICON_MIN_VOLTAGE_CELL = "mdi:battery-minus-outline"
 ICON_MAX_VOLTAGE_CELL = "mdi:battery-plus-outline"
+<<<<<<< HEAD
 ICON_STATE_OF_CHARGE = "mdi:battery-50"
+=======
+>>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
 ICON_RESIDUAL_CAPACITY = "mdi:battery-50"
 ICON_BATTERY_CAPACITY = "mdi:battery-50"
 ICON_RATED_CAPACITY = "mdi:battery-50"
@@ -368,9 +375,14 @@ CONFIG_SCHEMA = cv.Schema(
         ),
         cv.Optional(CONF_STATE_OF_CHARGE): sensor.sensor_schema(
             unit_of_measurement=UNIT_PERCENT,
+<<<<<<< HEAD
             icon=ICON_STATE_OF_CHARGE,
             accuracy_decimals=1,
             device_class=DEVICE_CLASS_EMPTY,
+=======
+            accuracy_decimals=1,
+            device_class=DEVICE_CLASS_BATTERY,
+>>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
             state_class=STATE_CLASS_MEASUREMENT,
         ),
         cv.Optional(CONF_RESIDUAL_CAPACITY): sensor.sensor_schema(

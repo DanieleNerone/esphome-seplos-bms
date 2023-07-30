@@ -7,11 +7,8 @@ namespace seplos_modbus {
 
 static const char *const TAG = "seplos_modbus";
 
-<<<<<<< HEAD
-=======
 static const uint16_t MAX_RESPONSE_SIZE = 340;
 
->>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
 void SeplosModbus::setup() {
   if (this->flow_control_pin_ != nullptr) {
     this->flow_control_pin_->setup();
@@ -21,11 +18,8 @@ void SeplosModbus::loop() {
   const uint32_t now = millis();
 
   if (now - this->last_seplos_modbus_byte_ > this->rx_timeout_) {
-<<<<<<< HEAD
-=======
     ESP_LOGVV(TAG, "Buffer cleared due to timeout: %s",
               format_hex_pretty(&this->rx_buffer_.front(), this->rx_buffer_.size()).c_str());
->>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
     this->rx_buffer_.clear();
     this->last_seplos_modbus_byte_ = now;
   }
@@ -36,11 +30,8 @@ void SeplosModbus::loop() {
     if (this->parse_seplos_modbus_byte_(byte)) {
       this->last_seplos_modbus_byte_ = now;
     } else {
-<<<<<<< HEAD
-=======
       ESP_LOGVV(TAG, "Buffer cleared due to reset: %s",
                 format_hex_pretty(&this->rx_buffer_.front(), this->rx_buffer_.size()).c_str());
->>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
       this->rx_buffer_.clear();
     }
   }
@@ -93,17 +84,6 @@ bool SeplosModbus::parse_seplos_modbus_byte_(uint8_t byte) {
   this->rx_buffer_.push_back(byte);
   const uint8_t *raw = &this->rx_buffer_[0];
 
-<<<<<<< HEAD
-  if (at == 0)
-    return true;
-
-  // Start of frame
-  if (raw[0] != 0x7E) {
-    ESP_LOGW(TAG, "Invalid header");
-
-    // return false to reset buffer
-    return false;
-=======
   // Start of frame
   if (at == 0) {
     if (raw[0] != 0x7E) {
@@ -114,21 +94,17 @@ bool SeplosModbus::parse_seplos_modbus_byte_(uint8_t byte) {
     }
 
     return true;
->>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
   }
 
   // End of frame '\r'
   if (raw[at] != 0x0D)
     return true;
 
-<<<<<<< HEAD
-=======
   if (at > MAX_RESPONSE_SIZE) {
     ESP_LOGW(TAG, "Maximum response size exceeded. Flushing RX buffer...");
     return false;
   }
 
->>>>>>> cda8aac0b8f7f41875b0db9ffe0c3c6dbbefbde7
   uint16_t data_len = at - 4 - 1;
   uint16_t computed_crc = chksum(raw + 1, data_len);
   uint16_t remote_crc = uint16_t(ascii_hex_to_byte(raw[at - 4], raw[at - 3])) << 8 |

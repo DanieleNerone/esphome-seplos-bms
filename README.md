@@ -12,6 +12,7 @@ ESPHome component to monitor Seplos BMS via UART or RS485
 * 1101-SP76 (reported by [@bagges](https://github.com/syssi/esphome-seplos-bms/issues/46))
 * 1101-SP101, PUSUNG-135 (reported by [@manznOnly](https://github.com/syssi/esphome-seplos-bms/discussions/50#discussioncomment-5630209))
 * 1101-10E-SP76-16S (reported by [@tobox](https://github.com/syssi/esphome-seplos-bms/discussions/42))
+* 1101-10E-JK06-16S (Apex 48200, Apex BMS 48V200A, reported by [@Pho3niX90](https://github.com/syssi/esphome-seplos-bms/issues/74))
 * Boqiang BMS007-LD43-16S-HW (reported by [@xdilian](https://github.com/syssi/esphome-seplos-bms/discussions/43)) requires custom settings
   ```
   protocol_version: 0x26
@@ -23,6 +24,7 @@ ESPHome component to monitor Seplos BMS via UART or RS485
   override_pack: 1
   override_cell_count: 10
   ```
+* Seplos BMS V3.0 Type C, B-48200-C (BMS16S200A-SP05B, FW 1.3, [@Goaheadz](https://github.com/syssi/esphome-seplos-bms/discussions/98)) using [esp8266-seplos-v3-example.yaml](esp32-seplos-v3-example.yaml)
 
 ## Untested devices
 
@@ -62,7 +64,7 @@ Please be aware of the different RJ45 pinout colors ([T-568A vs. T-568B](images/
 
 ## Requirements
 
-* [ESPHome 2022.4.0 or higher](https://github.com/esphome/esphome/releases).
+* [ESPHome 2024.6.0 or higher](https://github.com/esphome/esphome/releases).
 * Generic ESP32 or ESP8266 board
 
 ## Installation

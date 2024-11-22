@@ -28,7 +28,7 @@ void SeplosBms::on_telemetry_data_(const std::vector<uint8_t> &data) {
   };
 
   ESP_LOGI(TAG, "Telemetry frame (%d bytes) received", data.size());
-  ESP_LOGVV(TAG, "  %s", format_hex_pretty(&data.front(), data.size()).c_str());
+  ESP_LOGI(TAG, "  %s", format_hex_pretty(&data.front(), data.size()).c_str());
 
   // ->
   // 0x2000460010960001100CD70CE90CF40CD60CEF0CE50CE10CDC0CE90CF00CE80CEF0CEA0CDA0CDE0CD8060BA60BA00B970BA60BA50BA2FD5C14A0344E0A426803134650004603E8149F0000000000000000

@@ -18,6 +18,9 @@ void SeplosBms::on_seplos_modbus_data(const std::vector<uint8_t> &data) {
     return;
   }
 
+  ESP_LOGI(TAG, "Telemetry frame (%d bytes) received", data.size());
+  ESP_LOGVV(TAG, "  %s", format_hex_pretty(&data.front(), data.size()).c_str());
+
   ESP_LOGW(TAG, "Unhandled data received (data_len: 0x%02X): %s", data[5],
            format_hex_pretty(&data.front(), data.size()).c_str());
 }
@@ -210,7 +213,7 @@ float SeplosBms::get_setup_priority() const {
   return setup_priority::BUS - 1.0f;
 }
 
-void SeplosBms::update() { this->send(0x42, this->pack_); }
+void SeplosBms::update() { this->send(0x44, this->pack_); }
 
 void SeplosBms::publish_state_(binary_sensor::BinarySensor *binary_sensor, const bool &state) {
   if (binary_sensor == nullptr)
